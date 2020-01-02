@@ -11,7 +11,6 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|unique:users,email|email',
@@ -74,14 +73,23 @@ class AuthController extends Controller
         ]);
     }
 
+    public function logout()
+    {
+        auth()->logout();
+    }
+
     public function user(Request $request)
     {
         if(($user = $request->user()) !== null)
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'user' => $user,
+                ]
+            ]);
+
         return response()->json([
-            'success' => true,
-            'data' => [
-                'user' => $user,
-            ]
+           'success' => false,
         ]);
     }
 }
