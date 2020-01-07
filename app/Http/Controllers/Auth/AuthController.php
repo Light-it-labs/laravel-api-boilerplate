@@ -143,8 +143,12 @@ class AuthController extends Controller
             ]);
         }
 
-        $tokenData = DB::table('password_resets')
-                       ->where('token', $token)->first();
+        if(($tokenData = DB::table('password_resets')->where('token', $token)->first()) === null){
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid token',
+            ]);
+        }
 
         $user = User::where('email', $tokenData->email)->first();
         $user->update([
