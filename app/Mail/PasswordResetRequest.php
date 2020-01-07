@@ -12,13 +12,17 @@ class PasswordResetRequest extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * @var array
      */
-    public function __construct()
+    public $data;
+
+    /**
+     * Create a new message instance.
+     * @param array $data
+     */
+    public function __construct(array $data = [])
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -29,6 +33,6 @@ class PasswordResetRequest extends Mailable
     public function build()
     {
         return $this->from(config('mail.from.address'))
-                    ->view('mails.password-reset-request');
+                    ->markdown('mails.password-reset-request', $this->data);
     }
 }
