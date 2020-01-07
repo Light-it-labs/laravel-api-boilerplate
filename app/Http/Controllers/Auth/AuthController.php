@@ -21,6 +21,7 @@ class AuthController extends Controller
         if($validator->fails() === true){
             return response()->json([
                'success' => false,
+               'message' => 'Please check validation errors',
                'errors' => $validator->errors()
             ]);
         }
@@ -35,6 +36,7 @@ class AuthController extends Controller
 
         return response()->json([
             'success' => true,
+            'message' => 'User registered successfully',
             'data' => [
                 'user' => $user,
                 'token' => $token
@@ -52,6 +54,7 @@ class AuthController extends Controller
         if($validator->fails() === true){
             return response()->json([
                 'success' => false,
+                'message' => 'Please check validation errors',
                 'errors' => $validator->errors()
             ]);
         }
@@ -60,6 +63,7 @@ class AuthController extends Controller
         {
             return response()->json([
                 'success' => false,
+                'message' => 'Please check validation errors',
                 'errors' => [
                     'email' => ['There is something wrong! We could not verify details']
                 ]]);
@@ -67,6 +71,7 @@ class AuthController extends Controller
 
         return response()->json([
            'success' => true,
+           'message' => 'User logged successfully',
            'data' => [
                'user' => $request->user(),
                'token' => $token,
@@ -79,11 +84,22 @@ class AuthController extends Controller
         auth()->logout();
     }
 
+    public function reset(Request $request): JsonResponse
+    {
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Please check your email and follow the steps for reset your password',
+            'data' => []
+        ]);
+    }
+
     public function user(Request $request): JsonResponse
     {
         if(($user = $request->user()) !== null)
             return response()->json([
                 'success' => true,
+                'message' => 'User data',
                 'data' => [
                     'user' => $user,
                 ]
