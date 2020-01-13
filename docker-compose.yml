@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  app:
+    image: cjreysayago/simple-laravel
+    ports:
+      - ${APP_PORT}:80
+    volumes:
+      - ./:/var/www/html
+    links:
+      - db
+      - testdb
+    environment:
+       APACHE_RUN_USER: apache
+  db:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}:3306 # Use a different port to avoid conflicts
+  testdb:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: ${TEST_DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${TEST_DB_PASSWORD}
+    ports:
+      - ${TEST_DB_PORT}:3306 # Use a different port to avoid conflicts
