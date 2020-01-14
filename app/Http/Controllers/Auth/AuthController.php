@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\PasswordResetRequest;
 use App\User;
-use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function register(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -37,18 +37,32 @@ class AuthController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-        $token = auth()->attempt($request->only(['email', 'password']));
+        if (Auth::attempt($request->only(['email', 'password'])) === true) {
+            $user = Auth::user();
+            $token = $user->createToken('access-token')->accessToken;
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User registered successfully',
+                'data' => [
+                    'user' => $user,
+                    'token' => $token
+                ]
+            ]);
+        }
 
         return response()->json([
-            'success' => true,
-            'message' => 'User registered successfully',
-            'data' => [
-                'user' => $user,
-                'token' => $token
-            ]
-        ]);
+            'success' => false,
+            'message' => 'Please check validation errors',
+            'errors' => [
+                'email' => ['There is something wrong! We could not verify details']
+        ]]);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function login(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -64,107 +78,37 @@ class AuthController extends Controller
             ]);
         }
 
-        if(!$token = auth()->attempt($request->only(['email', 'password'])))
-        {
-            return response()->json([
-                'success' => false,
-                'message' => 'Please check validation errors',
-                'errors' => [
-                    'email' => ['There is something wrong! We could not verify details']
-                ]]);
-        }
-
-        return response()->json([
-           'success' => true,
-           'message' => 'User logged successfully',
-           'data' => [
-               'user' => $request->user(),
-               'token' => $token,
-           ]
-        ]);
-    }
-
-    public function logout()
-    {
-        auth()->logout();
-    }
-
-    public function reset(Request $request): JsonResponse
-    {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required',
-        ]);
-
-        if($validator->fails() === true){
-            return response()->json([
-                'success' => false,
-                'message' => 'Please check validation errors',
-                'errors' => $validator->errors()
-            ]);
-        }
-
-        if(($user = User::where('email', $request->email)->first()) !== null){
-            $token = str_random(40);
-
-            DB::table('password_resets')
-              ->insert([
-                  'email' => $request->email,
-                  'token' => $token
-              ]);
-
-            Mail::to($request->email)->send(new PasswordResetRequest(['token' => $token]));
+        if(Auth::attempt($request->only(['email', 'password'])) === true){
+            $user = Auth::user();
+            $token = $user->createToken('access-token')->accessToken;
 
             return response()->json([
                 'success' => true,
-                'message' => 'Please check your email and follow the steps for reset your password',
-                'data' => []
+                'message' => 'User logged successfully',
+                'data' => [
+                    'user' => $request->user(),
+                    'token' => $token,
+                ]
             ]);
         }
 
         return response()->json([
             'success' => false,
-            'message' => 'Theres no existing user with that email',
-            'data' => []
-        ]);
+            'message' => 'Please check validation errors',
+            'errors' => [
+                'email' => ['There is something wrong! We could not verify details']
+        ]]);
     }
 
-    public function resetPassword(Request $request, string $token): JsonResponse
+    public function logout(): void
     {
-        $validator = Validator::make($request->all(), [
-            'password' => 'required',
-            'confirm_password' => 'required|same:password'
-        ]);
-
-        if($validator->fails() === true){
-            return response()->json([
-                'success' => false,
-                'message' => 'Please check validation errors',
-                'errors' => $validator->errors()
-            ]);
-        }
-
-        if(($tokenData = DB::table('password_resets')->where('token', $token)->first()) === null){
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid token',
-            ]);
-        }
-
-        $user = User::where('email', $tokenData->email)->first();
-        $user->update([
-            'password' => bcrypt($request->password)
-        ]);
-
-        DB::table('password_resets')
-          ->where('email', $tokenData->email)->delete();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Password changed successfully',
-            'data' => []
-        ]);
+       Auth::logout();
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function user(Request $request): JsonResponse
     {
         if(($user = $request->user()) !== null)

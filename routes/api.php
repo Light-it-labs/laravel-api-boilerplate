@@ -3,11 +3,10 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ExampleController;
 
-Route::post('register', [AuthController::class, 'register'])->name('api.register');
+/* Auth Routes */
 Route::post('login', [AuthController::class, 'login'])->name('api.login');
-Route::post('logout', [AuthController::class, 'logout'])->name('api.logout');
-Route::post('reset', [AuthController::class, 'reset'])->name('api.reset');
-Route::post('reset/{token}', [AuthController::class, 'resetPassword'])->name('api.reset-password');
-Route::get('user', [AuthController::class, 'user'])->name('api.user');
+Route::post('register', [AuthController::class, 'register'])->name('api.register');
+Route::middleware('auth:api')->get('user', [AuthController::class, 'user'])->name('api.user');
 
+/* Routes */
 Route::get('example', [ExampleController::class, 'index'])->name('api.example');
