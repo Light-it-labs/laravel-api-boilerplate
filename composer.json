@@ -13,8 +13,7 @@
         "barryvdh/laravel-cors": "^1.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
-        "laravel/tinker": "^1.0",
-        "tymon/jwt-auth": "^1.0.0"
+        "laravel/tinker": "^1.0"
     },
     "require-dev": {
         "backpack/generators": "^2.0",
