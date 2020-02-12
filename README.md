@@ -17,6 +17,36 @@ Fixing coding standard violations
 php artisan l:fix
 ```
 
+## How to use
+
+```bash
+cp .env.example .env
+```
+
+```bash
+docker-compose up -d
+```
+
+```bash
+make install
+```
+
+```bash
+make key-generate
+```
+
+```bash
+make storage-link
+```
+
+```bash
+make fresh-seed
+```
+
+```bash
+make passport-install
+```
+
 ## About Lightit
 [Light-it](https://lightit.io) is a software development company with offices in Uruguay and Paraguay. 
 
