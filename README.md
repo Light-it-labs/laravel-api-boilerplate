@@ -10,11 +10,11 @@ Laravel API template is a boilerplate Laravel project. It follows the community 
 ## Detecting and fixing coding standard violations
 Checking coding standard violations:
 ```bash
-php artisan l:check
+make l:check
 ```
 Fixing coding standard violations
 ```bash
-php artisan l:fix
+make l:fix
 ```
 
 ## Build Setup
