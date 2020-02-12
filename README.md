@@ -18,13 +18,34 @@ php artisan l:fix
 ```
 
 ## How to use
-    1- ```bash cp .env.example .env```
-    2- ```bash docker-compose up -d```
-    3- ```bash make install```
-    4- ```bash make key-generate```
-    5- ```bash make storage-link```
-    6- ```bash make fresh-seed```
-    7- ```bash make passport-install```
+
+```bash
+cp .env.example .env
+```
+
+```bash
+docker-compose up -d
+```
+
+```bash
+make install
+```
+
+```bash
+make key-generate
+```
+
+```bash
+make storage-link
+```
+
+```bash
+make fresh-seed
+```
+
+```bash
+make passport-install
+```
 
 ## About Lightit
 [Light-it](https://lightit.io) is a software development company with offices in Uruguay and Paraguay. 
