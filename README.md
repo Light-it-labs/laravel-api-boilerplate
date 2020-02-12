@@ -45,4 +45,4 @@ $ make passport-install
 ## About Lightit
 [Light-it](https://lightit.io) is a software development company with offices in Uruguay and Paraguay. 
 
-![alt text](https://lightit.io/images/solo-logo.png)
+![alt text](https://avatars1.githubusercontent.com/u/39625568?s=200&v=4)
