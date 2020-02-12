@@ -36,10 +36,10 @@ $ make key-generate
 $ make storage-link
 
 # run migration and seeders
-make fresh-seed
+$ make fresh-seed
 
 # install passport client keys
-make passport-install
+$ make passport-install
 ```
 
 ## About Lightit
