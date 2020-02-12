@@ -21,11 +21,12 @@ class Controller extends BaseController
      * @param array $headers
      * @return JsonResponse
      */
-    protected function jsonResponse(array $payload,
-                                    string $message = '',
-                                    int $status = Response::HTTP_OK,
-                                    array $headers = []): JsonResponse
-    {
+    protected function jsonResponse(
+        array $payload,
+        string $message = '',
+        int $status = Response::HTTP_OK,
+        array $headers = []
+): JsonResponse {
         return response()->json([
             'message' => $message,
             'data' => $payload,

@@ -3,7 +3,6 @@
 
 namespace App\Messages;
 
-
 use Symfony\Component\HttpFoundation\Response;
 
 class ExampleResponseMessage extends ResponseMessage

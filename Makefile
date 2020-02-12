@@ -31,6 +31,12 @@ fresh-seed:
 passport-install:
 	@docker-compose exec --user=apache app php artisan passport:install
 
+l-check:
+	@docker-compose exec --user=apache app php artisan l:check
+
+l-fix:
+	@docker-compose exec --user=apache app php artisan l:fix
+
 dump-server:
 	@php artisan dump-server
 

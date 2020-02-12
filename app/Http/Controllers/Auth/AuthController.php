@@ -23,7 +23,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if($validator->fails() === true){
+        if ($validator->fails() === true) {
             return response()->json([
                'success' => false,
                'message' => 'Please check validation errors',
@@ -70,7 +70,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if($validator->fails() === true){
+        if ($validator->fails() === true) {
             return response()->json([
                 'success' => false,
                 'message' => 'Please check validation errors',
@@ -78,7 +78,7 @@ class AuthController extends Controller
             ]);
         }
 
-        if(Auth::attempt($request->only(['email', 'password'])) === true){
+        if (Auth::attempt($request->only(['email', 'password'])) === true) {
             $user = Auth::user();
             $token = $user->createToken('access-token')->accessToken;
 
@@ -111,7 +111,7 @@ class AuthController extends Controller
      */
     public function user(Request $request): JsonResponse
     {
-        if(($user = $request->user()) !== null)
+        if (($user = $request->user()) !== null)
             return response()->json([
                 'success' => true,
                 'message' => 'User data',
