@@ -17,34 +17,29 @@ Fixing coding standard violations
 php artisan l:fix
 ```
 
-## How to use
+## Build Setup
 
 ```bash
-cp .env.example .env
-```
+# create .env configuration file
+$ cp .env.example .env
 
-```bash
-docker-compose up -d
-```
+# setup docker containers
+$ docker-compose up -d
 
-```bash
-make install
-```
+# install dependices
+$ make install
 
-```bash
-make key-generate
-```
+# generate laravel app key
+$ make key-generate
 
-```bash
-make storage-link
-```
+# generate symlink to storage
+$ make storage-link
 
-```bash
-make fresh-seed
-```
+# run migration and seeders
+$ make fresh-seed
 
-```bash
-make passport-install
+# install passport client keys
+$ make passport-install
 ```
 
 ## About Lightit
