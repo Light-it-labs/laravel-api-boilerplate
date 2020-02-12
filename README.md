@@ -1,5 +1,5 @@
-# Laravel-Nuxt API Template
-Laravel Api Base is a boilerplate Laravel project. It follows the community best practices in terms of standards, security and maintainability, integrating a variety of testing and code quality tools. It's based on Laravel 5.8.
+# Laravel API Template
+Laravel API template is a boilerplate Laravel project. It follows the community best practices in terms of standards, security and maintainability, integrating a variety of testing and code quality tools. It's based on Laravel 5.8.
 
 
 ## Installed packages
