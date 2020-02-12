@@ -28,6 +28,9 @@ migrate:
 fresh-seed:
 	@docker-compose exec --user=apache app php artisan migrate:fresh --seed
 
+passport-install:
+	@docker-compose exec --user=apache app php artisan passport:install
+
 dump-server:
 	@php artisan dump-server
 
