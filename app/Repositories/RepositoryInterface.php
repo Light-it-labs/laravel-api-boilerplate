@@ -50,4 +50,9 @@ interface RepositoryInterface
      * @return Model
      */
     public function find(int $id, array $relations): ?Model;
+
+    /**
+     * @return string
+     */
+    public function model(): string;
 }

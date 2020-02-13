@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository\Eloquent;
+namespace App\Repositories\Eloquent;
 
 use App\Repository\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -66,7 +66,7 @@ class BaseRepository implements RepositoryInterface
     /**
      * @param int $id
      * @return bool
-     * @throws Exception
+     * @throws \Exception
      */
     public function delete(int $id): bool
     {
@@ -82,5 +82,13 @@ class BaseRepository implements RepositoryInterface
     public function find(int $id, array $relations): ?Model
     {
         return $this->model->with($relations)->findOrFail($relations);
+    }
+
+    /**
+     * @return string
+     */
+    public function model(): string
+    {
+        return get_class($this->model);
     }
 }
