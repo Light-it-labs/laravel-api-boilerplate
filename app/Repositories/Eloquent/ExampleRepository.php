@@ -3,8 +3,9 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Example;
+use App\Repositories\ExampleRepositoryInterface;
 
-class ExampleRepository extends BaseRepository
+class ExampleRepository extends BaseRepository implements ExampleRepositoryInterface
 {
     /**
      * ExampleRepository constructor.

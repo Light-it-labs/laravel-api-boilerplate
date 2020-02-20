@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repository\RepositoryInterface;
-use App\Repository\ExampleRepositoryInterface;
-use App\Repository\Eloquent\BaseRepository;
-use App\Repository\Eloquent\ExampleRepository;
+use App\Repositories\RepositoryInterface;
+use App\Repositories\ExampleRepositoryInterface;
+use App\Repositories\Eloquent\BaseRepository;
+use App\Repositories\Eloquent\ExampleRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {

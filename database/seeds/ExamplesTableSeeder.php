@@ -1,20 +1,20 @@
 <?php
 
-use App\Repository\Eloquent\ExampleRepository;
+use App\Repositories\ExampleRepositoryInterface;
 use Illuminate\Database\Seeder;
 
 class ExamplesTableSeeder extends Seeder
 {
     /**
-     * @var ExampleRepository
+     * @var ExampleRepositoryInterface
      */
     private $exampleRepository;
 
     /**
      * ExamplesSeeder constructor.
-     * @param ExampleRepository $exampleRepository
+     * @param ExampleRepositoryInterface $exampleRepository
      */
-    public function __construct(ExampleRepository $exampleRepository)
+    public function __construct(ExampleRepositoryInterface $exampleRepository)
     {
         $this->exampleRepository = $exampleRepository;
     }
