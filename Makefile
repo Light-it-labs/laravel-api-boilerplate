@@ -2,49 +2,42 @@
 include .env
 export
 
-containers:
-	docker-compose -f docker-compose.yml up -d
-
-kill-containers:
-	docker-compose down --remove-orphans
-
 ART=""
 artisan:
-	@docker-compose exec --user=apache app php artisan $(ART)
+	@php artisan $(ART)
 
 storage-link:
-	@docker-compose exec --user=apache app php artisan storage:link
+	@php artisan storage:link
 
 key-generate:
 	@php artisan key:generate
 
 install:
-	@docker-compose exec --user=apache app composer install
-	@docker-compose exec --user=apache app yarn
+	@composer install
 
 migrate:
 	@php artisan migrate
 
 fresh-seed:
-	@docker-compose exec --user=apache app php artisan migrate:fresh --seed
+	@php artisan migrate:fresh --seed
 
 passport-install:
-	@docker-compose exec --user=apache app php artisan passport:install
+	@php artisan passport:install
 
 l-check:
-	@docker-compose exec --user=apache app php artisan l:check
+	@php artisan l:check
 
 l-fix:
-	@docker-compose exec --user=apache app php artisan l:fix
+	@php artisan l:fix
 
 dump-server:
 	@php artisan dump-server
 
 test:
-	@docker-compose exec --user=apache app vendor/bin/phpunit
+	@vendor/bin/phpunit
 
 test-dusk:
-	@docker-compose exec --user=apache app php artisan dusk
+	@php artisan dusk
 
 BRANCH="develop"
 pull-and-push:
