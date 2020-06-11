@@ -1,10 +1,10 @@
 # Laravel API Template
-Laravel API template is a boilerplate Laravel project. It follows the community best practices in terms of standards, security and maintainability, integrating a variety of testing and code quality tools. It's based on Laravel 5.8.
+Laravel API template is a boilerplate Laravel project. It follows the community best practices in terms of standards, security and maintainability, integrating a variety of testing and code quality tools. It's based on Laravel 7.
 
 
 ## Installed packages
 - [Backpack](https://backpackforlaravel.com/) for easy administration.
-- [Laravel Telescope](https://laravel.com/docs/5.8/telescope) for easy debugging.
+- [Laravel Telescope](https://laravel.com/docs/7.x/telescope) for easy debugging.
 - [Laravel Query Detector](https://github.com/beyondcode/laravel-query-detector) to detect N+1 and increase performance.
 
 ## Detecting and fixing coding standard violations
