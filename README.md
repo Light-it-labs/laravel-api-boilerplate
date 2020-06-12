@@ -23,9 +23,6 @@ make l:fix
 # create .env configuration file
 $ cp .env.example .env
 
-# setup docker containers
-$ docker-compose up -d
-
 # install dependices
 $ make install
 
